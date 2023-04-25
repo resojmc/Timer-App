@@ -1,7 +1,8 @@
-#WIP, Can only set timer once, then program must be restarted to set again.
+#Imports tkinter, time, datetime modules
 import tkinter as tk
 import time, datetime
 
+#Initiates window and defines its dimensions, title, and its ability to be resized
 root = tk.Tk()
 root.geometry("250x250")
 root.title("Timer")
@@ -9,6 +10,7 @@ root.resizable(False, False)
 
 
 def countdown(hour, mins, secs):
+    #Takes total_seconds and displays it as a countdown
     total_seconds = hour * 3600 + mins * 60 + secs
     timer = datetime.timedelta(seconds = total_seconds)
     time_label.config(text=f"{timer}", font=("Ariel", 30))
@@ -18,6 +20,7 @@ def countdown(hour, mins, secs):
         time_label.config(text=f"00:00:00")
 
 def start_stop_timer():
+    #Starts timer from given value
     if hasattr(time_label, 'time'):
         root.after_cancel(time_label.time)
     hour = int(hour_entry.get())
@@ -26,6 +29,7 @@ def start_stop_timer():
     countdown(hour, mins, secs)
 
 def reset_button():
+    #Stops timer and resets it to 00:00:00
     if hasattr(time_label, 'time'):
         root.after_cancel(time_label.time)
     time_label.config(text=f"00:00:00")
